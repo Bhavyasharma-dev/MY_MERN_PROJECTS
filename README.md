@@ -16,12 +16,12 @@ Here is a quick overview of the projects in this repository:
 
 In these projects, I used a variety of technologies to build the applications:
 
-- Frontend: React, Redux, Material-UI
+- Frontend: React, Redux, Bootstrap
 - Backend: Node.js, Express.js
 - Database: MongoDB, Mongoose
 - Authentication: JWT
 - Real-time Communication: Socket.io
-- Other Tools: Cloudinary for image storage, Stripe for payment processing, Nodemailer for email notifications
+- Other Tools: Cloudinary,Multer for image storage and file upload, Stripe for payment processing, Nodemailer for email notifications
 
 ## Project Details
 
