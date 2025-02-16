@@ -43,11 +43,34 @@ app.use(express.static(path.resolve("./public")));
 
 
 app.get("/", async (req, res) => {
-  const allBlogs = await Blog.find({});
-  res.render("home", {
-    user: req.user,
-    blogs: allBlogs,
-  });
+  try {
+    
+    const cachedBlogs = await redis.get("allBlogs");
+
+    if (cachedBlogs) {
+      console.log("⚡ Served from Redis Cache");
+      return res.render("home", {
+        user: req.user,
+        blogs: JSON.parse(cachedBlogs),
+      });
+    }
+
+   
+    const allBlogs = await Blog.find({});
+    
+   
+    await redis.set("allBlogs", JSON.stringify(allBlogs), "EX", 60);
+
+    console.log("🆕 Fetched from MongoDB and Cached");
+
+    res.render("home", {
+      user: req.user,
+      blogs: allBlogs,
+    });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 
