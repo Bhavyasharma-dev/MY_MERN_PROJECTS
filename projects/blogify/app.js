@@ -4,10 +4,9 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const Redis = require("ioredis"); // Import Redis
+const { createClient } = require("redis");
 
 const Blog = require("./models/blog");
-
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
 
@@ -17,19 +16,23 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 
-const redis = new Redis(); // Defaults to localhost:6379
+const redisClient = createClient({
+  socket: {
+    host: "127.0.0.1", 
+    port: 6379, 
+  },
+});
 
-redis.on("connect", () => {
+redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
+
+(async () => {
+  await redisClient.connect();
   console.log("🟢 Connected to Redis!");
-});
+})();
 
-redis.on("error", (err) => {
-  console.error("❌ Redis Error:", err);
-});
-
-
+B
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("🟢 MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
@@ -44,9 +47,10 @@ app.use(express.static(path.resolve("./public")));
 
 app.get("/", async (req, res) => {
   try {
+    const cacheKey = "allBlogs";
     
-    const cachedBlogs = await redis.get("allBlogs");
-
+    
+    const cachedBlogs = await redisClient.get(cacheKey);
     if (cachedBlogs) {
       console.log("⚡ Served from Redis Cache");
       return res.render("home", {
@@ -55,11 +59,11 @@ app.get("/", async (req, res) => {
       });
     }
 
-   
-    const allBlogs = await Blog.find({});
-    
-   
-    await redis.set("allBlogs", JSON.stringify(allBlogs), "EX", 60);
+
+    const allBlogs = await Blog.find({}).lean();
+
+
+    await redisClient.setEx(cacheKey, 60, JSON.stringify(allBlogs));
 
     console.log("🆕 Fetched from MongoDB and Cached");
 
@@ -68,11 +72,10 @@ app.get("/", async (req, res) => {
       blogs: allBlogs,
     });
   } catch (error) {
-    console.error("Error fetching blogs:", error);
+    console.error("❌ Error fetching blogs:", error);
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 app.use("/user", userRoute);
 app.use("/blog", blogRoute);
