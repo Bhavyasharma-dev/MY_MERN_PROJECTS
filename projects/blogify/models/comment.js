@@ -9,10 +9,12 @@ const commentSchema = new Schema(
     blogId: {
       type: Schema.Types.ObjectId,
       ref: "blog",
+      index: true,  // Add index to 'blogId' for faster querying by blog
     },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "user",
+      index: true,  // Add index to 'createdBy' for faster filtering by author
     },
   },
   { timestamps: true }
