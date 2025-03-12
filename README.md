@@ -49,9 +49,7 @@ In these projects, I used a variety of technologies to build the applications:
      - User authentication with JWT
      - Media sharing in chats
 
-
-
- 4. BloodBank
+  4. BloodBank
    - A system to manage blood donations. Users can register as donors, track available blood types, and receive notifications for new donation requests.
    - Key Features:
      - Real-time updates on available blood types
