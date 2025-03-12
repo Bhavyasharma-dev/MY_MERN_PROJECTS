@@ -105,7 +105,7 @@ If you'd like to run these projects locally on your machine, follow these steps:
 
 I am a full-stack developer with a strong focus on web applications. My skill set includes the MERN stack (MongoDB, Express, React, Node.js), as well as other technologies like JWT authentication, real-time communication with Socket.io, and file handling with Cloudinary or Multer. I enjoy building applications that solve real-world problems, and I’m always looking to improve my skills and explore new technologies.
 
-Feel free to reach out to me at [bhavyasharma667788@gmail.com](mailto:bhavyasharma667788@gmail.com) for any questions or collaborations. You can also connect with me on [LinkedIn](https://www.linkedin.com/in/bhavyasharma).
+Feel free to reach out to me at [bhavyasharma667788@gmail.com](mailto:bhavyasharmadev@gmail.com) for any questions or collaborations. You can also connect with me on [LinkedIn](https://www.linkedin.com/in/bhavya-sharma-744baa286).
 
 
  License
