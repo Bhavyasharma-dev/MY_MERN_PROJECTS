@@ -33,7 +33,7 @@ In these projects, I used a variety of technologies to build the applications:
      - Responsive design with Material-UI
      - File upload using Cloudinary
 
- 3. DoctorApp
+ 2. DoctorApp
    - An appointment booking system for doctors and patients. Users can book appointments with doctors based on their available time slots. The app also sends email notifications when appointments are confirmed.
    - Key Features:
      - Doctor and patient dashboards
