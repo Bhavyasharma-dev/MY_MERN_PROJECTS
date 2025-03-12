@@ -33,14 +33,6 @@ In these projects, I used a variety of technologies to build the applications:
      - Responsive design with Material-UI
      - File upload using Cloudinary
 
-2. ChatApp
-   - A real-time messaging app where users can join private chat rooms and send messages to each other. The app uses Socket.io to provide instant message delivery.
-   - Key Features:
-     - Real-time chat using Socket.io
-     - Private and group chat rooms
-     - User authentication with JWT
-     - Media sharing in chats
-
  3. DoctorApp
    - An appointment booking system for doctors and patients. Users can book appointments with doctors based on their available time slots. The app also sends email notifications when appointments are confirmed.
    - Key Features:
@@ -48,6 +40,16 @@ In these projects, I used a variety of technologies to build the applications:
      - Calendar integration for available time slots
      - Appointment booking and management
      - Email notifications using Nodemailer
+  
+  3. ChatApp
+   - A real-time messaging app where users can join private chat rooms and send messages to each other. The app uses Socket.io to provide instant message delivery.
+   - Key Features:
+     - Real-time chat using Socket.io
+     - Private and group chat rooms
+     - User authentication with JWT
+     - Media sharing in chats
+
+
 
  4. BloodBank
    - A system to manage blood donations. Users can register as donors, track available blood types, and receive notifications for new donation requests.
